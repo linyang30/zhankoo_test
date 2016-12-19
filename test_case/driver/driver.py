@@ -1,7 +1,11 @@
 from selenium import webdriver
 
 def browser():
-    driver = webdriver.Chrome()
+    firefox_profile = webdriver.FirefoxProfile()
+    firefox_profile.set_preference('permissions.default.stylesheet', 2)
+    firefox_profile.set_preference('permissions.default.image', 2)
+    firefox_profile.update_preferences()
+    driver = webdriver.Firefox(firefox_profile)
     return driver
 
 if __name__ == '__main__':
