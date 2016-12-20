@@ -13,9 +13,6 @@ from test_case.driver import driver
 
 class OpenMainPageTest(MyTest):
     '''打开展酷首页'''
-    def setUp(self):
-        self.browser = driver.browser()
-
 
     def _test_open_main_page(self):
         '''打开展酷首页'''
@@ -51,24 +48,16 @@ class OpenMainPageTest(MyTest):
         '''
         主办方登陆并发布展会
         '''
-        # self.browser.implicitly_wait(10)
-        self.browser.get("http://www.zhankoo.com/") #打开展酷首页
-        loginElem = WebDriverWait(self.browser, 10).until(
-            lambda x: x.find_element_by_xpath('//*[@id="pg"]/div/ul/li[2]/a[2]')) #寻找登录按钮
+        self.driver.get("http://www.zhankoo.com/")
+        loginElem = self.driver.find_element_by_css_selector('div > ul > li.top_right > a:nth-child(2)') #寻找登录按钮
         loginElem.click() #点击登录按钮
-        time.sleep(1)
-        nameElem = WebDriverWait(self.browser, 10).until(
-            lambda x: x.find_element_by_xpath('//*[@id="Name"]')) #寻找登录名称控件
+        nameElem = self.driver.find_element_by_css_selector('#Name') #寻找用户名输入框
         nameElem.send_keys('18320836325') #输入登陆名称
-        #time.sleep(5)
-        passElem = WebDriverWait(self.browser, 10).until(
-            lambda x: x.find_element_by_xpath('//input[@id="Password"]')) #寻找登录密码控件
+        passElem = self.driver.find_element_by_css_selector('#Password') #寻找密码输入框
         passElem.send_keys('123456') #输入登陆密码
-        #time.sleep(5)
-        loginButtonElem = WebDriverWait(self.browser, 10).until(lambda x: x.find_element_by_xpath('//*[@id="js-login"]')) #寻找登录按钮
+        loginButtonElem = self.driver.find_element_by_css_selector('#js-login')
         loginButtonElem.click() #点击登录按钮
-        resTextElem = WebDriverWait(self.browser, 20).until(
-            lambda x: x.find_element_by_xpath('//*[@id="pg"]/div/ul/li[2]/a[1]/em'))
+        resTextElem = self.driver.find_element_by_css_selector('div > ul > li.top_right > a:nth-child(2) > em') #登陆后的角色
         assert resTextElem.text == '主办方' # 判断登陆的用户是否是主办方
         # currentWindow = self.browser.current_window_handle
         # backElem = WebDriverWait(self.browser, 10).until(

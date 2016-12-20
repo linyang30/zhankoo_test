@@ -6,6 +6,7 @@ def browser():
     firefox_profile.set_preference('permissions.default.image', 2)
     firefox_profile.update_preferences()
     driver = webdriver.Firefox(firefox_profile)
+    # driver = webdriver.PhantomJS()
     return driver
 
 if __name__ == '__main__':
